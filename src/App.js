@@ -6,6 +6,7 @@ import Box from "./Box";
 import MovieList from "./ListBox/MovieList";
 import WatchedSummary from "./WatchedBox/WatchedSummary";
 import WatchedMovieList from "./WatchedBox/WatchedMovieList";
+import MovieDetails from "./WatchedBox/MovieDetails";
 
 const tempMovieData = [
   {
@@ -62,6 +63,7 @@ export default function App() {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
 
   // useEffect(function () {
   //   console.log("After initial render");
@@ -118,6 +120,14 @@ export default function App() {
     [query]
   );
 
+  function handleSelectMovie(id) {
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
+
   return (
     <>
       <NavBar>
@@ -129,12 +139,23 @@ export default function App() {
         <Box>
           {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
+          )}
           {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMovieList watched={watched} />
+          {selectedId ? (
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseMovie={handleCloseMovie}
+            />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
