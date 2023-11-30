@@ -7,6 +7,7 @@ import MovieList from "./ListBox/MovieList";
 import WatchedSummary from "./WatchedBox/WatchedSummary";
 import WatchedMovieList from "./WatchedBox/WatchedMovieList";
 import MovieDetails from "./WatchedBox/MovieDetails";
+import Loader from "./Loader";
 
 const tempMovieData = [
   {
@@ -165,10 +166,6 @@ export default function App() {
 
 function Main({ children }) {
   return <main className="main">{children}</main>;
-}
-
-function Loader() {
-  return <p className="loader">Loading...</p>;
 }
 
 function ErrorMessage({ message }) {
