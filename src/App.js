@@ -36,9 +36,9 @@ const tempMovieData = [
 const tempWatchedData = [
   {
     imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
+    title: "Inception",
+    year: "2010",
+    poster:
       "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
     runtime: 148,
     imdbRating: 8.8,
@@ -46,9 +46,9 @@ const tempWatchedData = [
   },
   {
     imdbID: "tt0088763",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
+    title: "Back to the Future",
+    year: "1985",
+    poster:
       "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
     runtime: 116,
     imdbRating: 8.5,
@@ -129,6 +129,10 @@ export default function App() {
     setSelectedId(null);
   }
 
+  function handleAddWatched(movie) {
+    setWatched((watched) => [...watched, movie]);
+  }
+
   return (
     <>
       <NavBar>
@@ -151,6 +155,7 @@ export default function App() {
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
               apiKey={KEY}
+              onAddWatched={handleAddWatched}
             />
           ) : (
             <>
