@@ -156,6 +156,7 @@ export default function App() {
               onCloseMovie={handleCloseMovie}
               apiKey={KEY}
               onAddWatched={handleAddWatched}
+              watched={watched}
             />
           ) : (
             <>
