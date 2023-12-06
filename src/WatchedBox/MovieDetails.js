@@ -59,6 +59,23 @@ function MovieDetails({
     [title]
   );
 
+  useEffect(
+    function () {
+      function listenScape(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+
+      document.addEventListener("keydown", listenScape);
+
+      return function () {
+        document.removeEventListener("keydown", listenScape);
+      };
+    },
+    [onCloseMovie]
+  );
+
   function handleAdd() {
     const newMovie = {
       imdbID: selectedId,
